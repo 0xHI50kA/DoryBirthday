@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Dory</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fff9c4, #ffe082);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .container {
+      text-align: center;
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      max-width: 500px;
+      z-index: 2;
+      position: relative;
+    }
+
+    h1 {
+      color: #fbc02d;
+      font-size: 3rem;
+      font-weight: bold;
+      text-shadow: 2px 2px #ffeb3b;
+    }
+
+    .gift {
+      font-size: 90px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .gift:hover { transform: scale(1.15); }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 3;
+    }
+
+    .modal-content {
+      background: #fffde7;
+      padding: 30px;
+      border-radius: 20px;
+      width: 80%;
+      max-width: 550px;
+      text-align: center;
+      position: relative;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      cursor: pointer;
+      color: #fbc02d;
+      font-weight: bold;
+    }
+
+    .teddy { font-size: 90px; cursor:pointer; }
+    .flowers { font-size: 45px; margin: 10px 0; }
+
+    p { color: #555; line-height: 1.6; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="container">
+  <h1>🎉 Happy Birthday Dory 🎉</h1>
+  <p>Click the gift below to claim your birthday surprise 🎁</p>
+  <div class="gift" onclick="openGift()">🎁</div>
+</div>
+
+<div class="modal" id="birthdayModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeGift()">&times;</span>
+    <div class="flowers">🌸🌷🌹💐🌻</div>
+    <h2 style="color:#fbc02d;">A Special Letter for Dory 💛</h2>
+    <p>
+       Happy Birthday, Dory! On your special day, I hope your heart is filled with happiness, laughter, and beautiful memories that will stay with you forever. You deserve all the love, joy, and blessings this world has to offer. May this year bring you endless smiles, success in everything you do, and wonderful adventures ahead. Keep shining brightly and never stop being the amazing person you are. Wishing you the warmest hugs, sweetest moments, and a truly magical birthday celebration today and always.
+    </p>
+
+    <p style="color:green;">press the teddy bear for a surprise!</p>
+
+    <div class="teddy" onclick="window.location.href='Huggy.html'">🧸</div>
+
+    <div class="flowers">🌼🌺🌷🌹</div>
+  </div>
+</div>
+
+<script>
+function openGift() {
+  document.getElementById('birthdayModal').style.display = 'flex';
+}
+function closeGift() {
+  document.getElementById('birthdayModal').style.display = 'none';
+}
+
+// CONFETTI EFFECT
+const canvas = document.getElementById('confetti');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const pieces = [];
+const colors = ['#fbc02d','#ff4081','#4caf50','#2196f3','#ff9800'];
+
+for (let i = 0; i < 120; i++) {
+  pieces.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 6 + 2,
+    speed: Math.random() * 3 + 1,
+    color: colors[Math.floor(Math.random() * colors.length)]
+  });
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let p of pieces) {
+    ctx.fillStyle = p.color;
+    ctx.fillRect(p.x, p.y, p.r, p.r);
+    p.y += p.speed;
+    if (p.y > canvas.height) p.y = -10;
+  }
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hug Switch</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffe082, #fff9c4);
+      font-family: Arial, sans-serif;
+      position: relative;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    img {
+      width: 300px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transition: opacity 0.5s ease;
+    }
+
+    h2 {
+      color: #fbc02d;
+      margin-bottom: 20px;
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 10px 18px;
+      background: #fbc02d;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .back-btn:hover {
+      background: #f9a825;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="back-btn" onclick="goBack()">⬅ Back</button>
+
+  <div class="container">
+    <h2>🤗 Warm Hug For youu My Princess Dory oink Oink My everything WAHAHAHHA 🤗</h2>
+    <img id="hugImage" src="hug1.png" alt="hug image">
+  </div>
+
+  <script>
+    const images = ["hug.gif", "hug1.png"];
+    let index = 0;
+
+    setInterval(() => {
+      index = (index + 1) % images.length;
+      document.getElementById("hugImage").src = images[index];
+    }, 2000);
+
+    function goBack() {
+      window.location.href = "DoryBirthday.html";
+    }
+  </script>
+
+</body>
+</html>
